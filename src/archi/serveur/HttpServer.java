@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class HttpServer {
 
-	private Map<String,String> map = new HashMap<>();
+	private Map<String,String> map = new HashMap<String, String>();
 	
 	public HttpServer() throws IOException {
 		init();
