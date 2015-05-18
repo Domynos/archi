@@ -9,11 +9,13 @@ import java.io.IOException;
 public class PerformRequest {
 
 	private String route;
+	private int port;
 	private String serverRepository = new String("C:/www/website");
 	
-	public PerformRequest(String _route) {
+	public PerformRequest(String _route, int _port) {
 		// TODO Auto-generated constructor stub
 		route = _route;
+		port = _port;
 	}
 	
 	public String getDisplay(){
@@ -45,7 +47,8 @@ public class PerformRequest {
 				toDisplay.append("<h1>Index Of "+route+"</h1>");
 				File[] files = file.listFiles();
 				for (File oneFile : files) {
-					toDisplay.append("<a href=\"./"+route.substring(1)+"/"+oneFile.getName()+"\">"+oneFile.getName()+"</a><br>");
+					System.out.println("localhost:8080/"+route.substring(1)+"/"+oneFile.getName());
+					toDisplay.append("<a href=\"http://localhost:"+port+"/"+route.substring(1)+"/"+oneFile.getName()+"\">"+oneFile.getName()+"</a><br>");
 				}
 			}
 			//-------------------------------//
