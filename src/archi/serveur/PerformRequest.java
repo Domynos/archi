@@ -10,14 +10,17 @@ public class PerformRequest {
 
 	private String route;
 	private int port;
-	private String serverRepository = new String("C:/www/website");
-	
-	public PerformRequest(String _route, int _port) {
+	private String address;
+	private String serverRepository;
+
+	public PerformRequest(String _route, String _serverRepository, String _address, int _port) {
 		// TODO Auto-generated constructor stub
 		route = _route;
 		port = _port;
+		serverRepository = _serverRepository;
+		address = _address;
 	}
-	
+
 	public String getDisplay(){
 		//route = route.substring(route.indexOf('/'));
 		StringBuilder toDisplay = new StringBuilder();
@@ -47,17 +50,19 @@ public class PerformRequest {
 				toDisplay.append("<h1>Index Of "+route+"</h1>");
 				File[] files = file.listFiles();
 				for (File oneFile : files) {
-					System.out.println("localhost:8080/"+route.substring(1)+"/"+oneFile.getName());
-					toDisplay.append("<a href=\"http://localhost:"+port+"/"+route.substring(1)+"/"+oneFile.getName()+"\">"+oneFile.getName()+"</a><br>");
+					if(route.equals("/"))
+						toDisplay.append("<a href=\"http://"+address+":"+port+route.substring(1)+"/"+oneFile.getName()+"\">"+oneFile.getName()+"</a><br>");
+					else
+						toDisplay.append("<a href=\"http://"+address+":"+port+"/"+route.substring(1)+"/"+oneFile.getName()+"\">"+oneFile.getName()+"</a><br>");
 				}
 			}
 			//-------------------------------//
-			
+
 		}
 		else if(file.isFile()){
 			return null;
 		}
-		
+
 		return toDisplay.toString();
 	}
 }
